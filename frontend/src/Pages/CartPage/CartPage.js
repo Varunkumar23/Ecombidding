@@ -143,7 +143,7 @@ export default function CartPage() {
                             </div>
                           </td>
                           <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
-                            ₹{item.price.toLocaleString('en-IN')}
+                            ₹{item.price ?  item.price.toLocaleString('en-IN') : 'N/A'}
                           </td>
                           <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500">
                             ₹

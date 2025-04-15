@@ -36,12 +36,12 @@ function Categories() {
           </li>
           <li style={{ '--index': 2 }} className="l__i">
             <Link
-              to={`/search?category=Clothings`}
+              to={`/search?category=Clothing`}
               rel="noreferrer noopener"
               className="__a"
             >
               <span className="__span">
-                <i className="__i"></i>Clotings
+                <i className="__i"></i>Clothings
               </span>
             </Link>
           </li>

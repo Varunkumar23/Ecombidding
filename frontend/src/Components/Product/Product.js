@@ -47,7 +47,7 @@ function Product(props) {
               </div>
               <p className="text-gray-700 font-medium text-lg mb-4">
                 <small>₹</small>
-                {product.price.toLocaleString('en-IN')}
+                {product.price ? product.price.toLocaleString('en-IN') : 'N/A'}
               </p>
             </Link>
             {product.stock === 0 ? (

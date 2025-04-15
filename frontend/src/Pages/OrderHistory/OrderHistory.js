@@ -101,7 +101,7 @@ export default function OrderHistory() {
                 </div>
                 <div className="py-4 px-4 font-auto">
                   <small>₹</small>
-                  {order.totalPrice.toFixed(2)}
+                  { order.totalPrice ? order.totalPrice.toFixed(2) : ''}
                 </div>
                 <div
                   className={`py-4 px-4 ${

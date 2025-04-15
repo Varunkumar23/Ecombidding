@@ -60,8 +60,8 @@ function Home() {
           <>
             <Categories />
             <div className="products flex flex-wrap justify-center">
-              {products.map((product) => (
-                <div key={product.url}>
+              {products.map((product, index) => (
+                <div key={index}>
                   <Product product={product} />
                 </div>
               ))}

@@ -271,7 +271,7 @@ export default function OrderPage() {
                     </p>
                     <p className="text-base light:text-gray-300 leading-4 text-gray-600">
                       <small>₹</small>
-                      {order.itemsPrice.toFixed(2)}
+                      { order.itemsPrice ? order.itemsPrice.toFixed(2) : ''}
                     </p>
                   </div>
                   <div className="flex justify-between items-center w-full">
@@ -280,7 +280,7 @@ export default function OrderPage() {
                     </p>
                     <p className="text-base light:text-gray-300 leading-4 text-gray-600">
                       <small>₹</small>
-                      {order.taxPrice.toFixed(2)}
+                      { order.taxPrice ? order.taxPrice.toFixed(2) : ''}
                     </p>
                   </div>
                   <div className="flex justify-between items-center w-full">
@@ -289,7 +289,7 @@ export default function OrderPage() {
                     </p>
                     <p className="text-base light:text-gray-300 leading-4 text-gray-600">
                       <small>₹</small>
-                      {order.shippingPrice.toFixed(2)}
+                      { order.shippingPrice ? order.shippingPrice.toFixed(2) : ''}
                     </p>
                   </div>
                   <p className="text-xs light:text-white leading-4 text-center text-gray-300">
@@ -420,11 +420,15 @@ export default function OrderPage() {
                       Shipping Address
                     </p>
                     <p className="w-48 lg:w-full light:text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600">
-                      {order.shippingAddress.fullName}, <br />
-                      {order.shippingAddress.address},
-                      {order.shippingAddress.city}, <br />
-                      {order.shippingAddress.pinCode},
-                      {order.shippingAddress.country}
+                    {order.shippingAddress?.fullName ? (
+    <>
+      {order.shippingAddress.fullName}, <br />
+      {order.shippingAddress.address}, {order.shippingAddress.city}, <br />
+      {order.shippingAddress.pinCode}, {order.shippingAddress.country}
+    </>
+  ) : (
+    'Shipping address not available'
+  )}
                     </p>
                   </div>
                   <div className="flex justify-center md:justify-start items-center md:items-start flex-col space-y-4">
@@ -432,11 +436,15 @@ export default function OrderPage() {
                       Billing Address
                     </p>
                     <p className="w-48 lg:w-full light:text-gray-300 xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600">
-                      {order.shippingAddress.fullName}, <br />
-                      {order.shippingAddress.address},{' '}
-                      {order.shippingAddress.city}, <br />
-                      {order.shippingAddress.pinCode},{' '}
-                      {order.shippingAddress.country}
+                    {order.shippingAddress?.fullName ? (
+    <>
+      {order.shippingAddress.fullName}, <br />
+      {order.shippingAddress.address}, {order.shippingAddress.city}, <br />
+      {order.shippingAddress.pinCode}, {order.shippingAddress.country}
+    </>
+  ) : (
+    'Billing address not available'
+  )}
                     </p>
                   </div>
                 </div>

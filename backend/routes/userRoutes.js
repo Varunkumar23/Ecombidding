@@ -102,29 +102,39 @@ userRouter.post(
 userRouter.post(
   '/signup',
   expressAsyncHandler(async (req, res) => {
-    // creating new user
-    const newUser = new User({
-      name: req.body.name,
-      email: req.body.email,
-      password: bcrypt.hashSync(req.body.password),
-      seller: {
-        name: req.body.sellerName,
-        logo: req.body.sellerLogo,
-        description: req.body.sellerDescription,
-      },
-    });
-    // saving new user in mongodb
-    const user = await newUser.save();
-    // returns new user data to the frontend
-    res.send({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      isSeller: user.isSeller,
-      seller: user.seller,
-      token: generateToken(user),
-    });
+    try {
+      // creating new user
+      const newUser = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password),
+        seller: {
+          name: req.body.sellerName,
+          logo: req.body.sellerLogo,
+          description: req.body.sellerDescription,
+        },
+      });
+
+      // saving new user in mongodb
+      const user = await newUser.save();
+
+      // returns new user data to the frontend
+      res.send({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        isSeller: user.isSeller,
+        seller: user.seller,
+        token: generateToken(user),
+      });
+    } catch (error) {
+      if (error.code === 11000 && error.keyPattern.email) {
+        res.status(400).send({ message: 'Email already exists. Please use a different email.' });
+      } else {
+        res.status(500).send({ message: 'Internal Server Error' });
+      }
+    }
   })
 );
 

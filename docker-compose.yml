@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5000"
+    environment:
+      - MONGODB_URI=mongodb+srv://varunkumar:viratkohli@cluster0.ka0yv.mongodb.net/ecombidding?retryWrites=true&w=majority
+      - JWT_SECRET=viratkohli
+      - PAYPAL_CLIENT_ID=your_paypal_client_id
+      - CLOUDINARY_CLOUD_NAME=dtojs86fs
+      - CLOUDINARY_API_KEY=448179763388679
+      - CLOUDINARY_API_SECRET=W5dbTjoD4qiL78LSE-Q0TJgUcPU
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:5
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
