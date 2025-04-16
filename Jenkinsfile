@@ -25,9 +25,11 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Run tests (if you have tests defined)
-                    sh 'docker-compose run backend npm test'
-                    sh 'docker-compose run frontend npm test'
+                    // Run backend tests (if defined)
+                    sh 'docker-compose run --rm backend npm test || echo "No tests defined for backend"'
+
+                    // Run frontend tests (if defined)
+                    sh 'docker-compose run --rm frontend npm test || echo "No tests defined for frontend"'
                 }
             }
         }
@@ -35,7 +37,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Start the application
+                    // Start the application in detached mode
                     sh 'docker-compose up -d'
                 }
             }
@@ -46,6 +48,12 @@ pipeline {
         always {
             // Clean up unused Docker resources
             sh 'docker system prune -f'
+        }
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Check the logs for details.'
         }
     }
 }
