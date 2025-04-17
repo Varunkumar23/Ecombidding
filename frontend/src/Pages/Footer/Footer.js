@@ -17,7 +17,7 @@ function Footer() {
           <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
             Developed By{' '}
             <a
-              href="https://vaibhaw.netlify.app/"
+              href="/"
               target="_blank"
               rel="noreferrer"
               className=" hover:text-cyan-500 hover:font-medium hover:text-xl duration-200"
